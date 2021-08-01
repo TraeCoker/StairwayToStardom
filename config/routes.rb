@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :venus
   resources :musicians
   resources :bands
   resources :users

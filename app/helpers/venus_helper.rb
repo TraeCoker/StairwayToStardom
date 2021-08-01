@@ -1,0 +1,2 @@
+module VenusHelper
+end

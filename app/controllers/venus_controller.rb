@@ -1,0 +1,2 @@
+class VenusController < ApplicationController
+end
