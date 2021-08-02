@@ -36,4 +36,12 @@ class Musician < ApplicationRecord
         self.where(instrument: 3)
     end 
 
+    def self.join_band(band_id, musician_ids)
+        musician_ids.each do |id|
+            musician = Musician.find_by_id(id)
+            musician.update(band_id: band_id)
+        end 
+    end 
+
+
 end

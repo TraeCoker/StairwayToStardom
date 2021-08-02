@@ -9,7 +9,7 @@ class Band < ApplicationRecord
 
     def recruit_musicians
         musician_ids = [self.vocalist_id, self.drummer_id, self.guitarist_id, self.bassist_id]
-        Musician.join_band(musician_ids)
+        Musician.join_band(self.id, musician_ids)
     end 
-    
+
 end
