@@ -29,4 +29,10 @@ class SessionsController < ApplicationController
     def destroy 
     end 
 
+  private 
+
+    def auth 
+        request.env['omniauth.auth']
+    end 
+
 end 
