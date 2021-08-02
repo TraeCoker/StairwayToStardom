@@ -5,5 +5,7 @@
     <%= f.text_field :genre %>
     <%= f.label :location %>
     <%= f.text_field :location %>
+    <%= f.collection_select :vocalist_id, Musician.available_vocalists, :id, :name %>
     <%= f.submit "Create band" %>
+    
 <% end %>
