@@ -4,5 +4,6 @@ class Band < ApplicationRecord
     has_many :shows 
     has_many :reviews, through: :shows 
     validates :name, presence: true, uniqueness: true
-
+    validates :genre, :location, presence: true 
+    accepts_nest_attributes_for :musicians
 end
