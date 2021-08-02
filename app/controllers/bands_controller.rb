@@ -6,6 +6,7 @@ class BandsController < ApplicationController
 
     def create 
         @band = Band.new(band_params)
+        @band.user = current_user
 
         if @band.save 
             redirect_to band_path(@band)
@@ -35,4 +36,6 @@ class BandsController < ApplicationController
     def band_params
         params.require(:band).permit(:name, :genre, :location, :vocalist_id, :drummer_id, :guitarist_id, :bassist_id)
     end 
+
+    def set_musicians
 end
