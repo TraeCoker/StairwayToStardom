@@ -4,20 +4,12 @@ class Musician < ApplicationRecord
     enum instrument: [:vocals, :drums, :guitar, :bass]
     validates :name, presence: true, uniqueness: true 
 
-    def self.vocalists
-        self.where(instrument: 0)
+    def self.available(instrument)
+        self.where(instrument: instrument, band_id: nil)
     end 
 
-    def self.drummers
-        self.where(instrument: 1)
-    end 
-
-    def self.guitarists
-        self.where(instrument: 2)
-    end 
-
-    def self.bassists
-        self.where(instrument: 3)
+    def self.by_instrument(instrument)
+        self.where(instrument: instrument)
     end 
 
 end
