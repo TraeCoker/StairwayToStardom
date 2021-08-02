@@ -1,11 +1,20 @@
+<h1>Create New Band</h1>
 <%= form_for(@band) do |f| %>
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-    <%= f.label :genre %>
-    <%= f.text_field :genre %>
-    <%= f.label :location %>
-    <%= f.text_field :location %>
+    <p><%= f.label :name %>
+    <%= f.text_field :name %></p>
+    <p><%= f.label :genre %>
+    <%= f.text_field :genre %></p>
+    <p><%= f.label :location %>
+    <%= f.text_field :location %></p>
+    <br>
+    <p><%= f.label "Choose vocalist" %></p>
     <%= f.collection_select :vocalist_id, Musician.available_vocalists, :id, :name %>
-    <%= f.submit "Create band" %>
+    <p><%= f.label "Choose drummer" %></p>
+    <%= f.collection_select :drummer_id, Musician.available_drummers, :id, :name %>
+    <p><%= f.label "Choose guitarist" %></p>
+    <%= f.collection_select :guitarist_id, Musician.available_guitarists, :id, :name %>
+    <p><%= f.label "Choose bassist" %></p>
+    <%= f.collection_select :bassist_id, Musician.available_bassists, :id, :name %>
+    <p><%= f.submit "Create band" %></p>
     
 <% end %>
