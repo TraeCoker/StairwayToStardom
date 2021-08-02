@@ -1,6 +1,7 @@
 class BandsController < ApplicationController
 
     def new 
+        @band = Band.new 
     end 
 
     def create 
@@ -17,7 +18,7 @@ class BandsController < ApplicationController
 
     def update 
     end 
-    
+
     def destroy 
     end 
 
