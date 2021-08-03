@@ -34,6 +34,15 @@ class BandsController < ApplicationController
     def destroy 
     end 
 
+    def practice
+        @band = Band.find_by_id(params[:band_id])
+
+        @band.increment!(:practice_count, 1)
+        @band.save 
+
+        redirect_to band_path(@band)
+    end 
+
   private 
 
     def band_params

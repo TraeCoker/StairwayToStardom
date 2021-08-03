@@ -7,12 +7,15 @@ Rails.application.routes.draw do
   post '/signup', to: 'users#create'
   get '/leaderboard', to: 'bands#index'
   
+  
 
   resources :reviews
   resources :shows
   resources :venues
   resources :musicians
-  resources :bands
+  resources :bands do 
+    post 'practice', to: 'bands#practice'
+  end 
   resources :users
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

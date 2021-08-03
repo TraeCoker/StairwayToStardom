@@ -1,3 +1,4 @@
+<%= button_to 'practice', band_practice_path(@band), method: 'post' %>
 <h1><%= @band.name %></h1>
 ----------------------------------
 <h2>Genre: <%= @band.genre %></h2> 
@@ -5,6 +6,7 @@
  <h3>Managed by <%= @band.user.username %></h3>
 ----------------------------------
 <h3>Total shows played: <%= @band.shows.count %></h3>
+<h3>Practices since last show: <%= @band.practice_count%></h3>
 <h3>Reputation: <%= @band.reputation %></h3>
 <h4>Current Members:</h4>
 <ul>
