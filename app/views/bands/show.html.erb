@@ -1,5 +1,8 @@
-<%= button_to 'practice', band_practice_path(@band), method: 'post' %>
+
 <h1><%= @band.name %></h1>
+<%= link_to 'Practice', band_practice_path(@band), method: 'post' %>
+<%= link_to 'Book a show', venues_path %>
+<br>
 ----------------------------------
 <h2>Genre: <%= @band.genre %></h2> 
  <h2>location: <%=@band.location%></h2>
