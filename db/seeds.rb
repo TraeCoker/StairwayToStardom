@@ -6,3 +6,4 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 musicians = Musician.create([{ name: 'Bruce Springsteen', instrument: 0,}, {name: 'Neil Pert', instrument: 1}, {name: 'Jimmy Page', instrument: 2}, {name: 'Victor Wooten', instrument: 3}])
+venues = Venue.create([{ name: "Lil Bistra's Music Market", location: 'Boulder, CO', tier: 1,  description: 'Ecclectic record store in Boulder, Colorado. Featuring live bands and records of all genres.' }])
