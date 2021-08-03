@@ -13,6 +13,18 @@ class Band < ApplicationRecord
         Musician.join_band(self.id, musician_ids)
     end 
 
+    def reputation_to_tier
+        if self.reputation.between?(0,3)
+            1
+        elsif self.reputation.between?(4,6)
+            2
+        elsif  self.reputation.between?(7,9)
+            3
+        elsif self.reputation == 10
+            4
+        end 
+    end 
+
     def set_defaults
         self.reputation ||= 0
         self.practice_count ||= 0
