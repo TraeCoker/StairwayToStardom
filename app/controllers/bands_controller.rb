@@ -32,6 +32,7 @@ class BandsController < ApplicationController
     end 
 
     def destroy 
+        
     end 
 
     def practice

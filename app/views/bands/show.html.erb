@@ -2,6 +2,7 @@
 <h1><%= @band.name %></h1>
 <%= link_to 'Practice', band_practice_path(@band), method: 'post' %>
 <%= link_to 'Book a show', venues_path %>
+<%= link_to 'Disband', band_path(@band), method: 'delete'%>
 <br>
 ----------------------------------
 <h2>Genre: <%= @band.genre %></h2> 
