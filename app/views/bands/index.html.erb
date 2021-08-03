@@ -1,0 +1,5 @@
+<ol>
+    <% @bands.each do |band| %>
+        <li><%= link_to band.name, band_path(band) %> - <%=band.genre%> music from <%= band.location %> - <%= band.shows.count %> total shows</li>
+    <% end %>
+</ol>

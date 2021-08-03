@@ -20,5 +20,9 @@ class Band < ApplicationRecord
         self.mood ||= 2
     end 
 
+    def self.rank_by_reputation
+        self.order("reputation")
+    end 
+
 
 end

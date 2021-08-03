@@ -22,6 +22,7 @@ class BandsController < ApplicationController
     end 
 
     def index 
+        @bands = Band.rank_by_reputation
     end 
 
     def edit
