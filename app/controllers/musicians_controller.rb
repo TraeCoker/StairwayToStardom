@@ -5,6 +5,7 @@ class MusiciansController < ApplicationController
     end 
 
     def show 
+        @musician = Musician.find_by_id(params[:id])
     end 
 
 end
