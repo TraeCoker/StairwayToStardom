@@ -7,7 +7,10 @@ class Band < ApplicationRecord
     validates :genre, :location, presence: true 
     accepts_nested_attributes_for :musicians
     after_initialize :set_defaults
+    before_destroy :disband
 
+   
+        
     def recruit_musicians
         musician_ids = [self.vocalist_id, self.drummer_id, self.guitarist_id, self.bassist_id]
         Musician.join_band(self.id, musician_ids)
@@ -36,5 +39,10 @@ class Band < ApplicationRecord
         self.order("reputation")
     end 
 
+  private 
+    
+    def disband
+        self.musicians.each{|m| m.leave_band}
+    end 
 
 end

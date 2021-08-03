@@ -32,8 +32,12 @@ class BandsController < ApplicationController
     end 
 
     def destroy 
-        
+        @band = Band.find_by_id(params[:id])
+        @band.destroy 
+
+        redirect_to user_path(current_user)
     end 
+        
 
     def practice
         @band = Band.find_by_id(params[:band_id])

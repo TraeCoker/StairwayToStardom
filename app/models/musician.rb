@@ -3,6 +3,18 @@ class Musician < ApplicationRecord
     has_many :shows, through: :band 
     enum instrument: [:vocals, :drums, :guitar, :bass]
     validates :name, presence: true, uniqueness: true 
+    serialize :past_bands, Array
+    serialize :past_genres, Array
+
+    def leave_band
+        self.past_bands << self.band.name
+        self.past_genres << self.band.genre 
+
+        self.update(band_id: nil)
+    end 
+        
+
+
 
     def self.available_vocalists
         self.where(instrument: 0, band_id: nil)
