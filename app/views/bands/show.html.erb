@@ -1,6 +1,14 @@
 <h1><%= @band.name %></h1>
+----------------------------------
+<h2><%= @band.genre %> music from <%=@band.location%></h2>
+----------------------------------
+<h3>Total shows played: <%= @band.shows.count %></h3>
+<h3>Reputation: <%= @band.reputation %></h3>
+<h4>Current Members:</h4>
 <ul>
     <% @band.musicians.each do |m| %>
         <li><%= m.name %> - <%= m.instrument%></li>
     <% end %>
 </ul>
+<br>
+<h3>Recent Shows</h3>
