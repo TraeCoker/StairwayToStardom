@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_01_185109) do
+ActiveRecord::Schema.define(version: 2021_08_03_212238) do
 
   create_table "bands", force: :cascade do |t|
     t.string "name"
@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 2021_08_01_185109) do
     t.text "past_genres"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "total_shows"
   end
 
   create_table "reviews", force: :cascade do |t|
