@@ -38,10 +38,42 @@ class Band < ApplicationRecord
         self.order("reputation")
     end 
 
-    def play_show
-        stats_hash = { practices: practice_count, mood: mood, reputation: reputation, }
- 
+    def play_show(review_rating)
+        if review_rating == 4
+            self.update(mood: 4, practice_count: 0)
+        elsif review_rating == 3
+            self.update(mood: 3, practice_count: 0)
+        elsif review_rating == 2
+            self.mood -= 1
+            self.update(practice_count: 0)
+        elsif review_rating == 1
+            self.mood -= 2
+            self.update(practice_count: 0)
+        elsif  review_rating == 0
+            self.update(mood: 0, practice_count: 0)
+        end 
 
+        tired_musicians = []
+
+        self.musicians.each do |m|
+            if m.fatigue_level >= 4
+                tired_musicians << m 
+            end 
+        end 
+
+        if tired_musicians != [] && self.mood <= 2 
+            if self.mood == 2
+                count = rand(tired_musicians.count + 1)
+                tired_musicians[count].leave_band if tired_musicians[count]
+            elsif self.mood == 1
+                count = rand(tired_musicians.count)
+                tired_musicians[count].leave_band if  tired_musicians[count]
+            end 
+        end 
+
+        self.musicians.each |m|
+            m.increment!(:fatigue_level, 1)
+        end 
     end 
   private 
     
