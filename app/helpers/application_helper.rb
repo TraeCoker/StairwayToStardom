@@ -6,4 +6,8 @@ module ApplicationHelper
     def logged_in?
         !!current_user
     end 
+
+    def current_band
+        current_user.band
+    end 
 end
