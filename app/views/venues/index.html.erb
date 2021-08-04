@@ -1,5 +1,5 @@
 <ul>
     <% @venues.each do |venue|%>
-        <li><%= link_to venue.name, venue_path(venue) %> - <%= venue.location %> - "<%= venue.description %>"</li>
+        <li><%= link_to venue.name, venue_path(venue) %> - <%= venue.location %> - "<%= venue.description %>" - <%= link_to "Book a show at #{venue.name}.", new_venue_show_path(venue) %></li>
     <% end %>
 </ul>

@@ -1,5 +1,6 @@
 <h1><%= @venue.name%><h2>
 <h2>Location: <%= @venue.location%></h2>
+<%= link_to "Book a show at #{@venue.name}.", new_venue_show_path(@venue) %>
 <p>"<%= @venue.description%>"</p>
 <br>
 <h2>Recent Shows: </h2>

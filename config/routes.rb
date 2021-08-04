@@ -10,8 +10,9 @@ Rails.application.routes.draw do
   
 
   resources :reviews
-  resources :shows
-  resources :venues
+  resources :venues do 
+    resources :shows, only: [:new, :create]
+  end 
   resources :musicians
   resources :bands do 
     post 'practice', to: 'bands#practice'
