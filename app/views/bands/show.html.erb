@@ -20,3 +20,8 @@
 </ul>
 <br>
 <h3>Recent Reviews:</h3>
+<ul>
+    <% @band.reviews.each do |r|%>
+        <li>"<%=r.headline%>" - <%=r.show.venue.name%></li>
+    <% end %>
+</ul>
