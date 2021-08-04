@@ -17,14 +17,12 @@ class Band < ApplicationRecord
     end 
 
     def reputation_to_tier
-        if self.reputation.between?(0,3)
-            1
-        elsif self.reputation.between?(4,6)
-            2
+        if self.reputation.between?(4,6)
+           self.update(tier: 2)
         elsif  self.reputation.between?(7,9)
-            3
+            self.update(tier: 3)
         elsif self.reputation == 10
-            4
+            self.update(tier: 4)
         end 
     end 
 
@@ -33,6 +31,7 @@ class Band < ApplicationRecord
         self.practice_count ||= 0
         self.total_shows ||= 0
         self.mood ||= 2
+        self.tier ||= 1
     end 
 
     def self.rank_by_reputation

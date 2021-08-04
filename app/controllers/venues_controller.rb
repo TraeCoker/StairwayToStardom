@@ -5,7 +5,7 @@ class VenuesController < ApplicationController
     end 
 
     def index 
-        @venues = Venue.sort_by_tier(current_user.band.reputation_to_tier)
+        @venues = Venue.sort_by_tier(current_user.band.tier)
     end 
 
 end
