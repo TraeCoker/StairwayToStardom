@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 
   resources :reviews
   resources :venues do 
-    resources :shows, only: [:new, :create]
+    resources :shows, only: [:new, :create, :index]
   end 
   resources :musicians
   resources :bands do 
