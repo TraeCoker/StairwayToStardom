@@ -1,0 +1,3 @@
+<h2>Book a show for <%= current_user.band.name %> at <%=@venue.name%>?</h2>
+<%= link_to "Yes", venue_shows_path(@venue), method: 'post'%>
+<%= link_to "No", venues_path%>
