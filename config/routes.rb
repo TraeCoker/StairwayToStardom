@@ -9,9 +9,12 @@ Rails.application.routes.draw do
   
   
 
-  resources :reviews
+  
   resources :venues do 
     resources :shows, only: [:new, :create, :index]
+  end 
+  resources :shows do 
+    resources :reviews, only: [:new, :create, :show]
   end 
   resources :musicians
   resources :bands do 
