@@ -38,6 +38,11 @@ class Band < ApplicationRecord
         self.order("reputation")
     end 
 
+    def play_show
+        stats_hash = { practices: practice_count, mood: mood, reputation: reputation, }
+ 
+
+    end 
   private 
     
     def disband
