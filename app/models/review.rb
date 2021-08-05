@@ -6,6 +6,5 @@ class Review < ApplicationRecord
 
         def generate_content 
             self.headline = "Wow #{self.show.band.name} was great! #{self.show.band.genre} is not dead!"
-            self.rating = 4
         end 
 end

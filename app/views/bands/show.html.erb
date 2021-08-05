@@ -9,6 +9,7 @@
  <h2>location: <%=@band.location%></h2>
  <h3>Managed by <%= @band.user.username %></h3>
 ----------------------------------
+<h3> Mood: <%= @band.mood %></h3>
 <h3>Total shows played: <%= @band.shows.count %></h3>
 <h3>Practices since last show: <%= @band.practice_count%></h3>
 <h3>Reputation: <%= @band.reputation %></h3>

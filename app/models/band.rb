@@ -30,7 +30,7 @@ class Band < ApplicationRecord
         self.reputation ||= 0
         self.practice_count ||= 0
         self.total_shows ||= 0
-        self.mood ||= 2
+        self.mood ||= 4
         self.tier ||= 1
     end 
 
@@ -39,39 +39,36 @@ class Band < ApplicationRecord
     end 
 
     def play_show(review_rating)
-        if review_rating == 4
-            self.update(mood: 4, practice_count: 0)
-        elsif review_rating == 3
-            self.update(mood: 3, practice_count: 0)
-        elsif review_rating == 2
-            self.mood -= 1
-            self.update(practice_count: 0)
-        elsif review_rating == 1
-            self.mood -= 2
-            self.update(practice_count: 0)
-        elsif  review_rating == 0
+
+        if review_rating > 2
+            count = rand(3..4)
+            self.update(mood: count, practice_count: 0)
+        elsif review_rating.between?(1,2)
+            count = rand(1..2)
+            self.update(mood: count, practice_count: 0)
+        elsif review_rating == 0
             self.update(mood: 0, practice_count: 0)
         end 
 
         tired_musicians = []
 
-        self.musicians.each do |m|
-            if m.fatigue_level >= 4
-                tired_musicians << m 
+        self.musicians.each do |musician|
+            if musician.fatigue_level >= 4
+                tired_musicians << musician 
             end 
         end 
 
         if tired_musicians != [] && self.mood <= 2 
-            if self.mood == 2
+            if self.mood == 2 || self.mood == 1
                 count = rand(tired_musicians.count + 1)
                 tired_musicians[count].leave_band if tired_musicians[count]
-            elsif self.mood == 1
+            elsif self.mood == 0
                 count = rand(tired_musicians.count)
                 tired_musicians[count].leave_band if  tired_musicians[count]
             end 
         end 
 
-        self.musicians.each |m|
+        self.musicians.each do |m|
             m.increment!(:fatigue_level, 1)
         end 
     end 
