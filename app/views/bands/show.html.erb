@@ -16,7 +16,7 @@
 <h4>Current Members:</h4>
 <ul>
     <% @band.musicians.each do |m| %>
-        <li><%=link_to m.name, musician_path(m) %> - <%= m.instrument%> - fatigue level: <%= m.fatigue_level %></li>
+        <li><%=link_to m.name, musician_path(m) %> - <%= m.instrument%> - fatigue level <%= m.fatigue_level %></li>
     <% end %>
 </ul>
-<br>
+
