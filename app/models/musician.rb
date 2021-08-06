@@ -5,6 +5,12 @@ class Musician < ApplicationRecord
     validates :name, presence: true, uniqueness: true 
     serialize :past_bands, Array
     serialize :past_genres, Array
+    after_initialize :set_defaults
+
+    def set_defaults 
+        self.reputation ||= 0
+        self.fatigue_level ||= 0
+    end 
 
     def leave_band
         self.past_bands << self.band.name
