@@ -44,7 +44,7 @@ class BandsController < ApplicationController
         @band.increment!(:practice_count, 1)
         @band.save 
 
-        redirect_to band_path(@band)
+        render :show
     end 
 
   private 

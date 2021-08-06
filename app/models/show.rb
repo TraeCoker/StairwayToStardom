@@ -15,7 +15,7 @@ class Show < ApplicationRecord
         if band.tier == 1
             @score = 0
 
-            if band.shows.last 
+            if band.shows.last && band.shows.last.review.rating > 2
                @score = time_since_last_show(band.shows.last.created_at)
             end 
 
@@ -47,9 +47,9 @@ class Show < ApplicationRecord
 
      def time_since_last_show(last_show_time)
         if TimeDifference.between(last_show_time, Time.now.utc).in_minutes < 2
-            3
+            rand(0..3)
          elsif TimeDifference.between(last_show_time, Time.now.utc).in_minutes.between?(3,5)
-            2
+            rand(0..1)
         end
     end 
 

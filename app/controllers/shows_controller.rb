@@ -1,4 +1,5 @@
 class ShowsController < ApplicationController
+    before_action :assess_musicians_fatigue, only: [:new]
 
     def new 
         @venue = Venue.find_by_id(params[:venue_id])
@@ -21,4 +22,9 @@ class ShowsController < ApplicationController
     def index 
     end 
 
+    private 
+
+    def assess_musicians_fatigue
+        current_user.band.assess_fatigue
+    end 
 end

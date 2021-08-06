@@ -16,13 +16,7 @@
 <h4>Current Members:</h4>
 <ul>
     <% @band.musicians.each do |m| %>
-        <li><%=link_to m.name, musician_path(m) %> - <%= m.instrument%></li>
+        <li><%=link_to m.name, musician_path(m) %> - <%= m.instrument%> - fatigue level: <%= m.fatigue_level %></li>
     <% end %>
 </ul>
 <br>
-<h3>Recent Reviews:</h3>
-<ul>
-    <% @band.reviews.each do |r|%>
-        <li>"<%=r.headline%>" - <%=r.show.venue.name%></li>
-    <% end %>
-</ul>
