@@ -78,14 +78,14 @@ class Band < ApplicationRecord
     end 
 
     def assess_fatigue
-        if TimeDifference.between(self.shows.last.created_at, Time.now.utc).in_minutes > 2
-            self.musicians.each{|m| m.update(fatigue_level: rand(2..3)) if m.fatigue_level >= 4}
+        if TimeDifference.between(self.shows.last.created_at, Time.now.utc).in_minutes > 8
+            self.musicians.each{|m| m.update(fatigue_level: 0)}
 
         elsif TimeDifference.between(self.shows.last.created_at, Time.now.utc).in_minutes.between?(5,7)
             self.musicians.each{|m| m.update(fatigue_level: rand(1..3)) if m.fatigue_level >= 4}
 
-        elsif TimeDifference.between(self.shows.last.created_at, Time.now.utc).in_minutes > 8
-            self.musicians.each{|m| m.update(fatigue_level: 0)}
+        elsif TimeDifference.between(self.shows.last.created_at, Time.now.utc).in_minutes > 2
+            self.musicians.each{|m| m.update(fatigue_level: rand(2..3)) if m.fatigue_level >= 4}
         end 
     end
         
