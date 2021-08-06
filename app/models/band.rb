@@ -5,14 +5,19 @@ class Band < ApplicationRecord
     has_many :reviews, through: :shows 
     validates :name, presence: true, uniqueness: true
     validates :genre, :location, presence: true 
-    accepts_nested_attributes_for :musicians
+    accepts_nested_attributes_for :musicians, reject_if: proc {|attributes| attributes["name"].blank?}
     after_initialize :set_defaults
     before_destroy :disband
 
    
     def recruit_musicians
-        musician_ids = [self.vocalist_id, self.drummer_id, self.guitarist_id, self.bassist_id]
-        Musician.join_band(self.id, musician_ids)
+        lineup = self.musicians.all.collect{|m| m.instrument}
+        recruit_ids = [vocalist_id, drummer_id, guitarist_id, bassist_id].reject(&:nil?)
+        recruit_ids.each do |id|
+                musician = Musician.find_by_id(id)
+                instrument = musician.instrument
+                musician.update(band_id: self.id) if !lineup.include?(instrument)
+        end   
     end 
 
     def reputation_to_tier
@@ -69,6 +74,28 @@ class Band < ApplicationRecord
 
         self.musicians.each do |m|
             m.increment!(:fatigue_level, 1)
+        end 
+    end 
+
+    def missing_instrument?
+        instrument = []
+
+        if !self.musicians.vocals 
+            instrument << :vocals 
+        end 
+        if !self.musicians.guitar 
+            instrument << :guitar
+        end  
+        if !self.musicians.drums 
+            instrument << :drums 
+        end 
+        if !self.musicians.bass 
+            isntrument << :bass 
+        end 
+        if instrument == []
+            false 
+        else  
+            instrument 
         end 
     end 
 

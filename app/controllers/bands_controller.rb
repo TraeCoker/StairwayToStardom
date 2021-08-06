@@ -7,9 +7,8 @@ class BandsController < ApplicationController
     def create 
         @band = Band.new(band_params)
         @band.user = current_user
-
         if @band.save 
-            @band.recruit_musicians
+             @band.recruit_musicians
 
             redirect_to band_path(@band)
         else  
@@ -52,6 +51,32 @@ class BandsController < ApplicationController
 
     def band_params
         params.require(:band).permit(:name, :genre, :location, :vocalist_id, :drummer_id, :guitarist_id, :bassist_id, musicians_attributes: [:name, :instrument])
+    end 
+
+   # def recruited_musicians_params
+    #    params.require(:band).permit(:vocalist_id, :drummer_id, :guitarist_id, :bassist_id)
+    #end 
+
+    def missing_instrument?
+        instrument = []
+
+        if !self.musicians.vocals 
+            instrument << :vocals 
+        end 
+        if !self.musicians.guitar 
+            instrument << :guitar
+        end  
+        if !self.musicians.drums 
+            instrument << :drums 
+        end 
+        if !self.musicians.bass 
+            isntrument << :bass 
+        end 
+        if instrument == []
+            false 
+        else  
+            instrument 
+        end 
     end 
 
 end
