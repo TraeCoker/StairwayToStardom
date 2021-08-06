@@ -7,14 +7,37 @@
     <p><%= f.label :location %>
     <%= f.text_field :location %></p>
     <br>
-    <p><%= f.label "Choose vocalist" %></p>
-    <%= f.collection_select :vocalist_id, Musician.available_vocalists, :id, :name %>
-    <p><%= f.label "Choose drummer" %></p>
-    <%= f.collection_select :drummer_id, Musician.available_drummers, :id, :name %>
-    <p><%= f.label "Choose guitarist" %></p>
-    <%= f.collection_select :guitarist_id, Musician.available_guitarists, :id, :name %>
-    <p><%= f.label "Choose bassist" %></p>
-    <%= f.collection_select :bassist_id, Musician.available_bassists, :id, :name %>
+
+    <p><%= f.label "Choose vocalist or create new" %></p>
+    <%= f.collection_select :vocalist_id, Musician.available_vocalists, :id, :name,  {:prompt => "Select Vocalist"} %>
+    <p><%= f.fields_for :musicians, @band.musicians.build do |m| %></p>
+    <p><%= m.label :name %>
+    <%= m.text_field :name %>
+    <%= m.hidden_field :instrument, value: :vocals %>
+    <%end%>
+
+
+    <p><%= f.label "Choose drummer or create new" %></p>
+    <%= f.collection_select :drummer_id, Musician.available_drummers, :id, :name, {:prompt => "Select Drummer"} %>
+    <p><%= f.fields_for :musicians, @band.musicians.build do |m| %></p>
+    <p><%= m.label :name %>
+    <%= m.text_field :name %>
+    <%= m.hidden_field :instrument, value: :drums %>
+    <%end%>
+    <p><%= f.label "Choose guitarist or create new" %></p>
+    <%= f.collection_select :guitarist_id, Musician.available_guitarists, :id, :name, {:prompt => "Select Guitarist"} %>
+    <p><%= f.fields_for :musicians, @band.musicians.build do |m| %></p>
+    <p><%= m.label :name %>
+    <%= m.text_field :name %>
+    <%= m.hidden_field :instrument, value: :guitar %>
+    <%end%>
+    <p><%= f.label "Choose bassist or create new" %></p>
+    <%= f.collection_select :bassist_id, Musician.available_bassists, :id, :name,  {:prompt => "Select Bassist"} %>
+    <p><%= f.fields_for :musicians, @band.musicians.build do |m| %></p>
+    <p><%= m.label :name %>
+    <%= m.text_field :name %>
+    <%= m.hidden_field :instrument, value: :bass %>
+    <%end%>
     <p><%= f.submit "Create band" %></p>
     
 <% end %>

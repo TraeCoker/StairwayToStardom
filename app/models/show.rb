@@ -13,35 +13,34 @@ class Show < ApplicationRecord
     def calculate_outcome
         #band = self.band 
         if band.tier == 1
+            @score = 0
 
             if band.shows.last 
-               score = time_since_last_show(band.shows.last.created_at)
+               @score = time_since_last_show(band.shows.last.created_at)
             end 
 
-            if band.practice_count < 2 && !time_since_last_show(band.shows.last.created_at)
-                score = 0
-            elsif band.practice_count.between?(3,6)
-                score += 1
+            if band.practice_count.between?(3,6)
+                @score += 1
             elsif band.practice_count.between?(7,8)
-                score += 2
+                @score += 2
             elsif band.practice_count > 8
-                score += 3
+                @score += 3
             end
 
             if band.mood <= 2
-                score -= rand(1)
+                @score -= rand(1)
             elsif band.mood > 3
-                score += rand(1)
+                @score += rand(1)
             end 
 
             if band.reputation == 3
-                score += 1
+                @score += 1
             end 
 
             
-            self.build_review(rating: score.clamp(0, 4))
+            self.build_review(rating: @score.clamp(0, 4))
 
-            band.play_show(score)
+            band.play_show(@score)
             
         end 
      end 

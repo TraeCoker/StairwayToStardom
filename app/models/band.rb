@@ -10,7 +10,6 @@ class Band < ApplicationRecord
     before_destroy :disband
 
    
-        
     def recruit_musicians
         musician_ids = [self.vocalist_id, self.drummer_id, self.guitarist_id, self.bassist_id]
         Musician.join_band(self.id, musician_ids)
@@ -72,6 +71,7 @@ class Band < ApplicationRecord
             m.increment!(:fatigue_level, 1)
         end 
     end 
+
   private 
     
     def disband
