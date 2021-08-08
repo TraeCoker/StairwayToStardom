@@ -7,9 +7,12 @@ class BandsController < ApplicationController
     def create 
         @band = Band.new(band_params)
         @band.user = current_user
-        if @band.save 
-             @band.recruit_musicians
+        @band.recruit_musicians
+       
 
+        if @band.valid?
+           @band.save   
+           
             redirect_to band_path(@band)
         else  
             render :new 

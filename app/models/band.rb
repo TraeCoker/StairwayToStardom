@@ -8,17 +8,55 @@ class Band < ApplicationRecord
     accepts_nested_attributes_for :musicians, reject_if: proc {|attributes| attributes["name"].blank?}
     after_initialize :set_defaults
     before_destroy :disband
+    include ActiveModel::Validations
+    #validates_with GuitaristValidator
+    #validates_with VocalistValidator
+    #validates_with DrummerValidator
+    #validates_with BassistValidator
+    validates_with MusiciansValidator
 
-   
-    def recruit_musicians
-        lineup = self.musicians.all.collect{|m| m.instrument}
+   #def rollcall
+    #member_count = 0
+     #   if !missing_vocals?
+      #      member_count += 1
+       # end 
+        #if !missing_guitarist? 
+         #   member_count += 1
+       # end 
+        #if !missing_drummer? 
+         #   member_count += 1 
+        #end 
+        #if !missing_bassist?
+         #   member_count += 1
+        #end 
+
+       # member_count += self.musicians.count 
+       # member_count == 4
+   #end 
+
+    def recruit_musicians 
         recruit_ids = [vocalist_id, drummer_id, guitarist_id, bassist_id].reject(&:nil?)
         recruit_ids.each do |id|
                 musician = Musician.find_by_id(id)
-                instrument = musician.instrument
-                musician.update(band_id: self.id) if !lineup.include?(instrument)
-        end   
-    end 
+                self.musicians << musician 
+        end 
+    end   
+
+    #def recruit
+     #   lineup = self.musicians.all.collect{|m| m.instrument}
+      #  recruit_ids = [vocalist_id, drummer_id, guitarist_id, bassist_id].reject(&:nil?)
+       # recruit_ids.each do |id|
+        #        musician = Musician.find_by_id(id)
+         #       instrument = musician.instrument
+          #      musician.update(band_id: self.id) if !lineup.include?(instrument)
+        #end   
+    #end 
+
+    #def undo_recruitment
+     #   self.musicians.all do |m|
+      #      m.update(band_id: nil)
+       # end 
+    # end 
 
     def reputation_to_tier
         if self.reputation.between?(4,6)
@@ -118,6 +156,22 @@ class Band < ApplicationRecord
     
     def disband
         self.musicians.each{|m| m.leave_band}
+    end 
+
+    def missing_vocals?
+        self.musicians.vocals == [] && self.vocalist_id == nil
+    end 
+
+    def missing_guitarist?
+        self.musicians.guitar == [] && self.guitarist_id == nil 
+    end 
+
+    def missing_drummer?
+        self.musicians.drums == [] && self.drummer_id == nil
+    end 
+
+    def missing_bassist?
+        self.musicians.bass == [] && self.bassist_id == nil
     end 
 
 end
