@@ -18,8 +18,14 @@ class MusiciansController < ApplicationController
       render :index
     end 
 
+    
+
     def update 
-      byebug
+      @musician = Musician.find_by_id(params[:id])
+      @musician.update(band_id: current_band.id)
+      flash[:message] = "#{musician.name} has joined your band!"
+
+      redirect_to band_path(current_band)
     end 
 
 end
