@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   delete '/logout', to: 'sessions#destroy'
   get '/signup', to: 'users#new'
   post '/signup', to: 'users#create'
+  get '/musicians/available', to: 'musicians#available'
   #get '/leaderboard', to: 'bands#index'
   
   
