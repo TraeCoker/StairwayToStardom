@@ -21,6 +21,10 @@ class BandsController < ApplicationController
 
     def show
         @band = Band.find_by_id(params[:id])
+        if !full_band?
+            @instrument = @band.missing_instrument?[0]
+            flash[:message] = "Your #{@instrument} player has quit the band. You must recruit or create a new member to continue."
+        end 
     end 
 
     def index 

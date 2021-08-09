@@ -12,6 +12,7 @@
 
   <body>
   <%= render 'layouts/navigation' if logged_in? %>
+  <br><br>
   <% flash.each do |type, message| %>
     <%= message %>
   <% end %>

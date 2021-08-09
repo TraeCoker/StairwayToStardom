@@ -17,7 +17,6 @@ module ApplicationHelper
 
     def redirect_if_not_full_band
         if !full_band?
-            flash[:message] = "Must have full band."
             if current_band
                 redirect_to band_path(current_band)
             else  

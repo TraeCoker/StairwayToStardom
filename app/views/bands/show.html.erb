@@ -1,8 +1,13 @@
 
 <h1><%= @band.name %></h1>
+<% if @instrument %>
+<%= link_to "Choose existing #{@instrument} player", musicians_available_path%> | 
+<%= link_to "Create new #{@instrument} player", new_musician_path %>
+<%else%>
 <%= link_to 'Practice', band_practice_path(@band), method: 'post' %>
 <%= link_to 'Book a show', venues_path %>
 <%= link_to 'Disband', band_path(@band), method: 'delete'%>
+<% end %>
 <br>
 ----------------------------------
 <h2>Genre: <%= @band.genre %></h2> 

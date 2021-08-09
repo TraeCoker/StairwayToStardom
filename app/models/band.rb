@@ -143,19 +143,12 @@ class Band < ApplicationRecord
 
     def missing_instrument?
         instrument = []
-
-        if !self.musicians.vocals 
-            instrument << "vocals" 
-        end 
-        if !self.musicians.guitar 
-            instrument << "guitar"
-        end  
-        if !self.musicians.drums 
-            instrument << "drums" 
-        end 
-        if !self.musicians.bass 
-            isntrument << "bass" 
-        end 
+            
+        instrument << "vocals"  if self.musicians.vocals == []
+        instrument << "guitar"  if self.musicians.guitar == []
+        instrument << "drums"  if self.musicians.drums == []
+        instrument << "bass"   if self.musicians.bass == [] 
+  
         if instrument == []
             false 
         else  
