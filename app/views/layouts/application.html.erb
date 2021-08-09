@@ -11,7 +11,7 @@
   </head>
 
   <body>
-  <%= link_to 'log out', logout_path, method: 'delete'%>
+  <%= render 'layouts/navigation' if logged_in? %>
     <%= yield %>
   </body>
 </html>
