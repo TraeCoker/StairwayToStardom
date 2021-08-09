@@ -19,11 +19,20 @@ class MusiciansController < ApplicationController
     end 
 
     def new 
-      @musician = Musician.new(instrument: current_band.missing_instrument?[0])
+      @musician = Musician.new
     end 
     
     def create 
-      byebug
+      @musician = current_band.musicians.build(musician_params)
+      @musician.instrument = current_band.missing_instrument?[0]
+
+
+      if @musician.valid?
+        @musician.save 
+        redirect_to band_path(current_band)
+      else  
+        render :new 
+      end 
     end 
 
     def update 
@@ -34,4 +43,9 @@ class MusiciansController < ApplicationController
       redirect_to band_path(current_band)
     end 
 
+    private 
+
+    def musician_params 
+      params.require(:musician).permit(:name)
+    end 
 end

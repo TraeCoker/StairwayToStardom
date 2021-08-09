@@ -74,8 +74,8 @@ class Band < ApplicationRecord
     end 
 
     def set_ids
-        self.update(vocalist_id: self.musicians.vocals.first.id) if self.vocalist_id == nil 
-        self.update(guitarist_id: self.musicians.guitar.first.id)  if self.guitarist_id == nil 
+        self.update(vocalist_id: self.musicians.vocals.first.id) if self.vocalist_id == nil || self.vocalist_id != self.musicians.vocals.first.id
+        self.update(guitarist_id: self.musicians.guitar.first.id)  if self.guitarist_id == nil || self.guitarist_id != self.musicians.vocals.first.id
         self.update(drummer_id: self.musicians.drums.first.id) if self.drummer_id == nil
         self.update(bassist_id: self.musicians.bass.first.id) if self.bassist_id == nil 
     end 
