@@ -21,8 +21,12 @@ class Musician < ApplicationRecord
         
 
 
-    def self.available(band_reputation)
-        self.where(band_id: nil, reputation: 0..band_reputation)
+    def self.available(band_reputation, instrument = "all")
+        if instrument == "all"
+            self.where(band_id: nil, reputation: 0..band_reputation)
+        else 
+            self.where(band_id: nil, reputation: 0..band_reputation, instrument: instrument)
+        end 
     end 
 
     def self.available_vocalists

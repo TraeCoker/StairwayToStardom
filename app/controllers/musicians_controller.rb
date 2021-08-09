@@ -10,7 +10,7 @@ class MusiciansController < ApplicationController
 
     def available
       if current_user.band 
-        @musicians = Musician.available(current_user.band.reputation)
+        @musicians = Musician.available(current_user.band.reputation, current_user.band.missing_instrument?[0])
       else  
         @musicians = Musician.available(0)
       end 
