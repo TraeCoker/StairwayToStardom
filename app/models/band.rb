@@ -81,7 +81,6 @@ class Band < ApplicationRecord
     end 
 
     def play_show(review_rating)
-
         if review_rating > 2
             count = rand(3..4)
             self.update(mood: count, practice_count: 0)
