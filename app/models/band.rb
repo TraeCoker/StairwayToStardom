@@ -7,7 +7,6 @@ class Band < ApplicationRecord
     validates :genre, :location, presence: true 
     accepts_nested_attributes_for :musicians, reject_if: proc {|attributes| attributes["name"].blank?}
     after_initialize :set_defaults
-    after_save :set_ids 
     before_destroy :disband
     include ActiveModel::Validations
     validates_with MusiciansValidator
@@ -73,12 +72,10 @@ class Band < ApplicationRecord
         self.tier ||= 1
     end 
 
-    def set_ids
-        self.update(vocalist_id: self.musicians.vocals.first.id) if self.vocalist_id == nil || self.vocalist_id != self.musicians.vocals.first.id
-        self.update(guitarist_id: self.musicians.guitar.first.id)  if self.guitarist_id == nil || self.guitarist_id != self.musicians.vocals.first.id
-        self.update(drummer_id: self.musicians.drums.first.id) if self.drummer_id == nil
-        self.update(bassist_id: self.musicians.bass.first.id) if self.bassist_id == nil 
+    def reset_ids
+        self.update(vocalist_id: nil, guitarist_id: nil, bassist_id: nil, drummer_id: nil)
     end 
+      
 
     def self.rank_by_reputation
         self.order("reputation")
