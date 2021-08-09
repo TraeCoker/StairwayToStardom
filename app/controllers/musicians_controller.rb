@@ -18,4 +18,8 @@ class MusiciansController < ApplicationController
       render :index
     end 
 
+    def update 
+      byebug
+    end 
+
 end

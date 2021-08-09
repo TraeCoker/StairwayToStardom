@@ -1,4 +1,6 @@
 <h1><%= @musician.name %></h1>
+<%= recruit_if_looking(@musician)%>
+
 <h2>Instrument: <%= @musician.instrument%></h2>
 <h2>Current Band: <%= @musician.band.name if @musician.band %></h2>
 <h3>Reputation: <%= @musician.reputation%></h3>
