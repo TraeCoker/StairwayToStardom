@@ -145,16 +145,16 @@ class Band < ApplicationRecord
         instrument = []
 
         if !self.musicians.vocals 
-            instrument << :vocals 
+            instrument << "vocals" 
         end 
         if !self.musicians.guitar 
-            instrument << :guitar
+            instrument << "guitar"
         end  
         if !self.musicians.drums 
-            instrument << :drums 
+            instrument << "drums" 
         end 
         if !self.musicians.bass 
-            isntrument << :bass 
+            isntrument << "bass" 
         end 
         if instrument == []
             false 

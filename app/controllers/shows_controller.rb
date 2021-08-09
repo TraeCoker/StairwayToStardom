@@ -1,5 +1,6 @@
 class ShowsController < ApplicationController
     before_action :assess_musicians_fatigue, only: [:new]
+    before_action :redirect_if_not_full_band
 
     def new 
         @venue = Venue.find_by_id(params[:venue_id])
