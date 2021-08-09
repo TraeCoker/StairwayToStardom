@@ -16,7 +16,7 @@ class Musician < ApplicationRecord
         self.past_bands << self.band.name
         self.past_genres << self.band.genre 
 
-        self.update(band_id: nil)
+        self.update(band_id: nil, fatigue_level: 0)
     end 
         
 

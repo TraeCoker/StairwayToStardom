@@ -103,16 +103,24 @@ class Band < ApplicationRecord
         if tired_musicians != [] && self.mood <= 2 
             if self.mood == 2 || self.mood == 1
                 count = rand(tired_musicians.count + 1)
-                tired_musicians[count].leave_band if tired_musicians[count]
+                if tired_musicians[count]
+                     @musician_name = tired_musicians[count].name
+
+                     tired_musicians[count].leave_band 
+                end 
             elsif self.mood == 0
                 count = rand(tired_musicians.count)
-                tired_musicians[count].leave_band if  tired_musicians[count]
+                @musician_name = tired_musicians[count].name
+
+                tired_musicians[count].leave_band
             end 
         end 
 
         self.musicians.each do |m|
             m.increment!(:fatigue_level, 1)
         end 
+
+        @musician_name if @musician_name
     end 
 
     def assess_fatigue
