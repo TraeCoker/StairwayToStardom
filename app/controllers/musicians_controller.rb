@@ -18,7 +18,13 @@ class MusiciansController < ApplicationController
       render :index
     end 
 
+    def new 
+      @musician = Musician.new(instrument: current_band.missing_instrument?[0])
+    end 
     
+    def create 
+      byebug
+    end 
 
     def update 
       @musician = Musician.find_by_id(params[:id])
