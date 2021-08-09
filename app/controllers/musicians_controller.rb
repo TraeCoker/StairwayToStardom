@@ -29,6 +29,8 @@ class MusiciansController < ApplicationController
 
       if @musician.valid?
         @musician.save 
+
+        flash[:message] = "#{@musician.name} has joined your band!"
         redirect_to band_path(current_band)
       else  
         render :new 
@@ -38,7 +40,7 @@ class MusiciansController < ApplicationController
     def update 
       @musician = Musician.find_by_id(params[:id])
       @musician.update(band_id: current_band.id)
-      flash[:message] = "#{musician.name} has joined your band!"
+      flash[:message] = "#{@musician.name} has joined your band!"
 
       redirect_to band_path(current_band)
     end 
