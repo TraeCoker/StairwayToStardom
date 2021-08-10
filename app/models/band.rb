@@ -84,17 +84,57 @@ class Band < ApplicationRecord
     def play_show(review_rating)
         if review_rating > 2
             count = rand(3..4)
+            self.increment(:total_shows)
             self.update(mood: count, practice_count: 0)
         elsif review_rating.between?(1,2)
             count = rand(1..2)
+            self.increment(:total_shows)
             self.update(mood: count, practice_count: 0)
         elsif review_rating == 0
+            self.increment(:total_shows)
             self.update(mood: 0, practice_count: 0)
         end 
+
+        if self.total_shows == 1
+            self.update(reputation: 1)
+            increment_musician_rep
+        elsif self.total_shows == 50
+            self.update(reputation: 2)
+            increment_musician_rep
+        elsif self.total_shows == 100
+            self.update(reputation: 3)
+            increment_musician_rep
+        elsif self.total_shows == 150
+            self.update(reputation: 4)
+            increment_musician_rep
+        elsif self.total_shows == 220
+            self.update(reputation: 4)
+            increment_musician_rep
+        elsif self.total_shows == 330
+            self.update(reputation: 5)
+            increment_musician_rep
+        elsif self.total_shows == 440
+            self.update(reputation: 6)
+            increment_musician_rep
+        elsif self.total_shows == 575
+            self.update(reputation: 7)
+            increment_musician_rep
+        elsif self.total_shows == 700
+            self.update(reputation: 8)
+            increment_musician_rep
+        elsif self.total_shows == 850
+            self.update(reputation: 9)
+            increment_musician_rep
+        elsif self.total_shows == 1000
+            self.update(reputation: 10)
+            increment_musician_rep
+        end 
+    
 
         tired_musicians = []
 
         self.musicians.each do |musician|
+            musician.increment!(:total_shows)
             if musician.fatigue_level >= 4
                 tired_musicians << musician 
             end 
@@ -154,7 +194,13 @@ class Band < ApplicationRecord
     end 
 
   private 
-    
+
+    def increment_musician_rep
+        self.musicians.each do |m|
+            m.increment!(:reputation)
+        end 
+    end 
+
     def disband
         self.musicians.each{|m| m.leave_band}
     end 
