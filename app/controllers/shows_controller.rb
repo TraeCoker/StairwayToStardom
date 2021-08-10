@@ -37,7 +37,7 @@ class ShowsController < ApplicationController
     end 
 
     def show_was_promoted
-        params[:show][:promoted] && params[:show][:promoted] == "1"
+        params[:show] && params[:show][:promoted] == "1"
     end 
 
 end
