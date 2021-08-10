@@ -81,7 +81,7 @@ class Band < ApplicationRecord
         elsif self.total_shows == 850
             self.update(reputation: 9)
             increment_musician_rep
-        elsif self.total_shows == 1000
+        elsif self.total_shows == 1000 && self.musicians.collect{|m| m.reputation == 10}.uniq.count == 1 && self.musicians.collect{|m| m.reputation == 10}.uniq[0] == true 
             self.update(reputation: 10, tier: 4)
             increment_musician_rep
         end 
