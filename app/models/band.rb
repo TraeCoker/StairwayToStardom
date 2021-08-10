@@ -132,27 +132,38 @@ class Band < ApplicationRecord
     
 
         tired_musicians = []
+        max_limit_tired_musicians = []
 
         self.musicians.each do |musician|
             musician.increment!(:total_shows)
-            if musician.fatigue_level >= 4
+            if musician.fatigue_level.between?(4,9)
                 tired_musicians << musician 
+            elsif musician.fatigue_level >= 10
+                max_limit_tired_musicians << musician 
             end 
         end 
 
-        if tired_musicians != [] && self.mood <= 2 
-            if self.mood == 2 || self.mood == 1
-                count = rand(tired_musicians.count + 1)
-                if tired_musicians[count]
-                     @musician_name = tired_musicians[count].name
 
-                     tired_musicians[count].leave_band 
+        if max_limit_tired_musicians != []
+            count = rand(max_limit_tired_musicians.count)
+
+            @musician_name = max_limit_tired_musicians[count].name
+            max_limit_tired_musicians[count].leave_band
+        else
+            if tired_musicians != [] && self.mood <= 2 
+                if self.mood == 2 || self.mood == 1
+                    count = rand(tired_musicians.count + 1)
+                        if tired_musicians[count]
+                        @musician_name = tired_musicians[count].name
+
+                        tired_musicians[count].leave_band
+                        end  
+                elsif self.mood == 0
+                    count = rand(tired_musicians.count)
+                    @musician_name = tired_musicians[count].name
+
+                    tired_musicians[count].leave_band
                 end 
-            elsif self.mood == 0
-                count = rand(tired_musicians.count)
-                @musician_name = tired_musicians[count].name
-
-                tired_musicians[count].leave_band
             end 
         end 
 
