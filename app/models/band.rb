@@ -91,6 +91,7 @@ class Band < ApplicationRecord
         max_limit_tired_musicians = []
 
         self.musicians.each do |musician|
+            musician.update(reputation: 1) if musician.reputation == 0
             musician.increment!(:total_shows)
             if musician.fatigue_level.between?(4,9)
                 tired_musicians << musician 
