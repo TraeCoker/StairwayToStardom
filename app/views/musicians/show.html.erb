@@ -5,6 +5,8 @@
 <h2>Current Band: <%= @musician.band.name if @musician.band %></h2>
 <h3>Reputation: <%= @musician.reputation%></h3>
 <h3>Total Shows Played: <%= @musician.total_shows%>
-<h4>Genres: <%= @musician.past_genres%></h4>
-<h4>Past Bands: <%= @musician.past_bands%></h4>
+<h4>Genres:  <ul><% @musician.past_genres.uniq.each do |genre|%>
+                    <li><%=genre%></li> <%end%></ul></h4>
+<h4>Past Bands: <ul><% @musician.past_bands.uniq.each do |band|%>
+                    <li><%=band%></li> <%end%></ul></h4>
 
