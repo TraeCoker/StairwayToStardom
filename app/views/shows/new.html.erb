@@ -1,3 +1,10 @@
 <h2>Book a show for <%= current_user.band.name %> at <%=@venue.name%>?</h2>
-<%= link_to "Yes", venue_shows_path(@venue), method: 'post'%>
-<%= link_to "No", venues_path%>
+<%= form_for @show, :url => venue_shows_path(@venue), method: 'post' do |f| %>
+    <% if offer_promotion?%>
+        <%= f.label "Would you like to promote this show?" %>
+        <%= f.check_box :promoted %>
+    <% end %>
+    <%= f.submit "Book Show"%>
+<% end %>
+
+<%= button_to "Back to Venues", venues_path%>

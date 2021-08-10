@@ -4,12 +4,19 @@ class ShowsController < ApplicationController
 
     def new 
         @venue = Venue.find_by_id(params[:venue_id])
+
+        @show = Show.new 
     end 
 
     def create 
-        @venue = Venue.find_by_id(params[:venue_id])
 
-        show = Show.new(venue_id: @venue.id, band_id: current_user.band.id)
+        @venue = Venue.find_by_id(params[:venue_id])
+    
+        if show_was_promoted
+            show = Show.new(venue_id: @venue.id, band_id: current_user.band.id, promoted: true)
+        else 
+            show = Show.new(venue_id: @venue.id, band_id: current_user.band.id)
+        end 
 
         if show.save 
             redirect_to show_review_path(show, show.review)
@@ -28,4 +35,9 @@ class ShowsController < ApplicationController
     def assess_musicians_fatigue
         current_user.band.assess_fatigue
     end 
+
+    def show_was_promoted
+        params[:show][:promoted] && params[:show][:promoted] == "1"
+    end 
+
 end
