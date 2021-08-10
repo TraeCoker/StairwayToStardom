@@ -168,7 +168,16 @@ class Band < ApplicationRecord
         end 
 
         self.musicians.each do |m|
-            m.increment!(:fatigue_level, 1)
+            if m.reputation.between?(0,2)
+                count = rand(1..3)
+                m.increment!(:fatigue_level, count)
+            elsif m.reputation.between(3,5)
+                count = rand(1..2)
+                m.increment!(:fatigue_level, count)
+            elsif m.reputation.between(6,10)
+                count = rand(1..4)
+                m.increment!(:fatigue_level, count)
+            end 
         end 
 
         @musician_name if @musician_name
