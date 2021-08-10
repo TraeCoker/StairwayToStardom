@@ -11,25 +11,7 @@ class Band < ApplicationRecord
     include ActiveModel::Validations
     validates_with MusiciansValidator
 
-   #def rollcall
-    #member_count = 0
-     #   if !missing_vocals?
-      #      member_count += 1
-       # end 
-        #if !missing_guitarist? 
-         #   member_count += 1
-       # end 
-        #if !missing_drummer? 
-         #   member_count += 1 
-        #end 
-        #if !missing_bassist?
-         #   member_count += 1
-        #end 
-
-       # member_count += self.musicians.count 
-       # member_count == 4
-   #end 
-
+   
     def recruit_musicians 
         recruit_ids = [vocalist_id, drummer_id, guitarist_id, bassist_id].reject(&:nil?)
         recruit_ids.each do |id|
@@ -37,32 +19,6 @@ class Band < ApplicationRecord
                 self.musicians << musician 
         end 
     end   
-
-    #def recruit
-     #   lineup = self.musicians.all.collect{|m| m.instrument}
-      #  recruit_ids = [vocalist_id, drummer_id, guitarist_id, bassist_id].reject(&:nil?)
-       # recruit_ids.each do |id|
-        #        musician = Musician.find_by_id(id)
-         #       instrument = musician.instrument
-          #      musician.update(band_id: self.id) if !lineup.include?(instrument)
-        #end   
-    #end 
-
-    #def undo_recruitment
-     #   self.musicians.all do |m|
-      #      m.update(band_id: nil)
-       # end 
-    # end 
-
-    def reputation_to_tier
-        if self.reputation.between?(4,6)
-           self.update(tier: 2)
-        elsif  self.reputation.between?(7,9)
-            self.update(tier: 3)
-        elsif self.reputation == 10
-            self.update(tier: 4)
-        end 
-    end 
 
     def set_defaults
         self.reputation ||= 0
@@ -105,7 +61,7 @@ class Band < ApplicationRecord
             self.update(reputation: 3)
             increment_musician_rep
         elsif self.total_shows == 150
-            self.update(reputation: 4)
+            self.update(reputation: 4, tier: 2)
             increment_musician_rep
         elsif self.total_shows == 220
             self.update(reputation: 4)
@@ -117,7 +73,7 @@ class Band < ApplicationRecord
             self.update(reputation: 6)
             increment_musician_rep
         elsif self.total_shows == 575
-            self.update(reputation: 7)
+            self.update(reputation: 7, tier: 3)
             increment_musician_rep
         elsif self.total_shows == 700
             self.update(reputation: 8)
@@ -126,7 +82,7 @@ class Band < ApplicationRecord
             self.update(reputation: 9)
             increment_musician_rep
         elsif self.total_shows == 1000
-            self.update(reputation: 10)
+            self.update(reputation: 10, tier: 4)
             increment_musician_rep
         end 
     

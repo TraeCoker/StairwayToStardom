@@ -62,10 +62,6 @@ class BandsController < ApplicationController
         params.require(:band).permit(:name, :genre, :location, :vocalist_id, :drummer_id, :guitarist_id, :bassist_id, musicians_attributes: [:name, :instrument])
     end 
 
-   # def recruited_musicians_params
-    #    params.require(:band).permit(:vocalist_id, :drummer_id, :guitarist_id, :bassist_id)
-    #end 
-
     def missing_instrument?
         instrument = []
 
