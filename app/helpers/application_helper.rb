@@ -12,7 +12,9 @@ module ApplicationHelper
     end 
 
     def full_band?
-        current_user.band.musicians.count == 4
+        if current_user.band 
+            current_user.band.musicians.count == 4
+        end 
     end 
 
     def redirect_if_not_full_band

@@ -7,11 +7,7 @@ Rails.application.routes.draw do
   get '/signup', to: 'users#new'
   post '/signup', to: 'users#create'
   get '/musicians/available', to: 'musicians#available'
-  #get '/leaderboard', to: 'bands#index'
-  
-  
 
-  
   resources :venues do 
     resources :shows, only: [:new, :create, :index]
   end 
@@ -23,5 +19,6 @@ Rails.application.routes.draw do
     post 'practice', to: 'bands#practice'
   end 
   resources :users
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+ 
+  get '*path' => redirect('/')
 end
