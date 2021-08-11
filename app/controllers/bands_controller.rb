@@ -1,5 +1,7 @@
 class BandsController < ApplicationController
+    before_action :redirect_if_not_logged_in
     before_action :redirect_if_not_full_band, only: [:practice]
+    
     def new 
         @band = Band.new 
     end 
