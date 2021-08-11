@@ -1,5 +1,9 @@
 <ul>
     <% @musicians.each do |m|%>
-        <li><%= link_to m.name, musician_path(m)%> - <%=m.instrument%> - reputation: <%=m.reputation%></li>
+        <% if !full_band? && former_member(m) %>
+            <li><%=m.name%> - <%=m.instrument%> - reputation: <%=m.reputation%></li>
+        <% else %>
+            <li><%= link_to m.name, musician_path(m)%> - <%=m.instrument%> - reputation: <%=m.reputation%></li>
+        <%end%>
     <%end%>
 </ul>
