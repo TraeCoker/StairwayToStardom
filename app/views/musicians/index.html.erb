@@ -1,3 +1,9 @@
+ <h3>Filter by instrument:</h3>
+  <%= form_tag("/musicians", method: "get") do %>
+    <%= select_tag "instrument", options_for_select(["vocals", "drums", "guitar", "bass"]), include_blank: "All" %>
+    <%= submit_tag "Filter" %>
+  <%end%>
+</div>
 <ul>
     <% @musicians.each do |m|%>
         <% if !full_band? && former_member(m) %>

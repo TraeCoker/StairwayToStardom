@@ -24,6 +24,10 @@ class Musician < ApplicationRecord
         self.order(reputation: :desc)
     end 
 
+    def self.filter_by_instrument(instrument)
+        self.where(instrument: instrument).order(reputation: :desc)
+    end 
+
     def self.available(band_reputation, instrument = "all")
         if instrument == "all"
             self.where(band_id: nil, reputation: 0..band_reputation).order(reputation: :desc)

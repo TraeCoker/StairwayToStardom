@@ -1,7 +1,11 @@
 class MusiciansController < ApplicationController
     
     def index 
+      if !params[:instrument].blank? 
+        @musicians = Musician.filter_by_instrument(params[:instrument])
+      else  
         @musicians = Musician.rank_by_reputation
+      end 
     end 
 
     def show 
