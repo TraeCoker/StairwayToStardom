@@ -37,7 +37,7 @@ class Show < ApplicationRecord
                 @score += 1
             end 
 
-            departed_member = band.play_show(@score.clamp(0, 4))
+            departed_member = band.play_show(@score.clamp(0, 4), self.promoted)
 
             if departed_member
                 self.final_show_for = departed_member

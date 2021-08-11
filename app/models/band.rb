@@ -37,7 +37,7 @@ class Band < ApplicationRecord
         self.order("reputation")
     end 
 
-    def play_show(review_rating)
+    def play_show(review_rating, promoted)
         if review_rating > 2
             count = rand(3..4)
             self.increment(:total_shows)
@@ -49,6 +49,26 @@ class Band < ApplicationRecord
         elsif review_rating == 0
             self.increment(:total_shows)
             self.update(mood: 0, practice_count: 0)
+        end 
+
+        if promoted = true 
+            if review_rating == 0
+                self.musicians.each{|m| m.decrement!(:reputation)}
+            elsif review_rating == 1
+                self.musicians.each do |m| 
+                    count = rand(0..1) 
+                    m.decrement!(:reputation) if count == 1
+                end 
+            elsif review_rating == 2
+                self.musicians.first.decrement!(:reputation)
+            elsif review_rating == 3
+                self.musicians.each do |m| 
+                    count = rand(0..1) 
+                    m.increment!(:reputation) if count == 1
+                end 
+            elsif review_rating == 4
+                self.musicians.each{|m| m.increment!(:reputation)}
+            end 
         end 
 
         if self.total_shows == 1
@@ -128,10 +148,10 @@ class Band < ApplicationRecord
             if m.reputation.between?(0,2)
                 count = rand(1..3)
                 m.increment!(:fatigue_level, count)
-            elsif m.reputation.between(3,5)
+            elsif m.reputation.between?(3,5)
                 count = rand(1..2)
                 m.increment!(:fatigue_level, count)
-            elsif m.reputation.between(6,10)
+            elsif m.reputation.between?(6,10)
                 count = rand(1..4)
                 m.increment!(:fatigue_level, count)
             end 
