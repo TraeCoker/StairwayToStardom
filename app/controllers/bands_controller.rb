@@ -30,7 +30,13 @@ class BandsController < ApplicationController
     end 
 
     def index 
-        @bands = Band.rank_by_reputation
+        @genres = Band.all.each.collect{|b| b.genre }.uniq
+
+        if !params[:genre].blank?
+            @bands = Band.by_genre(params[:genre])
+        else
+            @bands = Band.rank_by_reputation
+        end 
     end 
 
     def edit

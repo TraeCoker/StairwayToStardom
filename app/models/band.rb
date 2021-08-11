@@ -37,6 +37,10 @@ class Band < ApplicationRecord
         self.order(reputation: :desc)
     end 
 
+    def self.by_genre(genre)
+        self.where(genre: genre).order(reputation: :desc)
+    end 
+    
     def play_show(review_rating, promoted)
         if review_rating > 2
             count = rand(3..4)

@@ -1,3 +1,11 @@
+<h1>Top Rated Bands</h1>
+<div>
+  <h3>Filter by genre:</h3>
+  <%= form_tag("/bands", method: "get") do %>
+    <%= select_tag "genre", options_for_select(@genres), include_blank: "All Genres" %>
+    <%= submit_tag "Filter" %>
+  <%end%>
+</div>
 <ol>
     <% @bands.each do |band| %>
         <li><%= link_to band.name, band_path(band) %> - <%=band.genre%> music from <%= band.location %> - <%= band.shows.count %> total shows</li>
