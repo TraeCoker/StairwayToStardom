@@ -34,7 +34,7 @@ class Band < ApplicationRecord
       
 
     def self.rank_by_reputation
-        self.order("reputation")
+        self.order(reputation: :desc)
     end 
 
     def play_show(review_rating, promoted)
