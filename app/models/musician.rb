@@ -20,12 +20,15 @@ class Musician < ApplicationRecord
     end 
         
 
+    def self.rank_by_reputation
+        self.order(reputation: :desc)
+    end 
 
     def self.available(band_reputation, instrument = "all")
         if instrument == "all"
-            self.where(band_id: nil, reputation: 0..band_reputation)
+            self.where(band_id: nil, reputation: 0..band_reputation).order(reputation: :desc)
         else 
-            self.where(band_id: nil, reputation: 0..band_reputation, instrument: instrument)
+            self.where(band_id: nil, reputation: 0..band_reputation, instrument: instrument).order(reputation: :desc)
         end 
     end 
 

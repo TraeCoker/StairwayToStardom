@@ -1,5 +1,5 @@
 <ul>
     <% @musicians.each do |m|%>
-        <li><%= link_to m.name, musician_path(m)%> - <%=m.instrument%></li>
+        <li><%= link_to m.name, musician_path(m)%> - <%=m.instrument%> - reputation: <%=m.reputation%></li>
     <%end%>
 </ul>

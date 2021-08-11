@@ -1,7 +1,7 @@
 class MusiciansController < ApplicationController
     
     def index 
-        @musicians = Musician.all 
+        @musicians = Musician.rank_by_reputation
     end 
 
     def show 
