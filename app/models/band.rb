@@ -51,7 +51,7 @@ class Band < ApplicationRecord
             self.update(mood: 0, practice_count: 0)
         end 
 
-        if promoted = true 
+        if promoted == true 
             if review_rating == 0
                 self.musicians.each{|m| m.decrement!(:reputation)}
             elsif review_rating == 1
