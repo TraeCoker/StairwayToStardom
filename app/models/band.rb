@@ -196,7 +196,7 @@ class Band < ApplicationRecord
 
   private 
 
-    def average_reputation
+    def average_musician_reputation
         rep = self.musicians.all.collect{|m| m.reputation}
         rep.sum % rep.size
     end 
