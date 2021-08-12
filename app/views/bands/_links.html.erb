@@ -4,5 +4,6 @@
 <%else%>
     <%= link_to 'Practice', band_practice_path(@band), method: 'post' %>
     <%= link_to 'Book a show', venues_path %>
+    <%= link_to 'Edit Band', edit_band_path(@band) %>
     <%= link_to 'Disband', band_path(@band), method: 'delete'%>
 <% end %>
