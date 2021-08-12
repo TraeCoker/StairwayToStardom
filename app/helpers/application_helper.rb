@@ -28,7 +28,7 @@ module ApplicationHelper
     end 
 
     def navigation_helper
-        if current_user.band.id 
+        if current_user.band.try(:id)
           link_to('My Band', band_path(current_user.band))
         else 
           link_to('Start a Band', new_band_path)

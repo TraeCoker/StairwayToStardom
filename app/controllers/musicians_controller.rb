@@ -1,6 +1,6 @@
 class MusiciansController < ApplicationController
   before_action :redirect_if_not_logged_in
-  before_action :redirect_if_no_band, only: [:show]
+  before_action :redirect_if_no_band, only: [:show, :index]
     
     
     def index 
@@ -57,5 +57,5 @@ class MusiciansController < ApplicationController
     def musician_params 
       params.require(:musician).permit(:name)
     end 
-    
+
 end
