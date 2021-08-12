@@ -1,0 +1,7 @@
+<h1>Edit <%=@band.name%></h1>
+<%= render partial: "layouts/error", locals: {object: @band} %>
+
+<%= form_for(@band) do |f| %>
+    <%= render partial: 'form', locals: {f: f} %>
+    <p><%= f.submit "Create band" %></p>
+<% end %>

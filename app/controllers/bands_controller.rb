@@ -43,6 +43,7 @@ class BandsController < ApplicationController
     end 
 
     def edit
+        @band = Band.find_by_id(params[:id])
     end 
 
     def update 
