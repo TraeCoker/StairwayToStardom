@@ -7,6 +7,10 @@ class Musician < ApplicationRecord
     serialize :past_genres, Array
     after_initialize :set_defaults
 
+    def name=(value)
+        self[:name] = value.titleize
+    end 
+
     def set_defaults 
         self.reputation ||= 0
         self.fatigue_level ||= 0
