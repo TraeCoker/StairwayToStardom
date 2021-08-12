@@ -11,7 +11,7 @@
   </head>
 
   <body>
-  <%= render 'layouts/navigation' if logged_in? %>
+  <%= navigation_helper %>
   <br><br>
   <% flash.each do |type, message| %>
     <%= message %>
