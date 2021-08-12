@@ -8,4 +8,11 @@ class ApplicationController < ActionController::Base
                 redirect_to login_path
             end 
         end 
+
+        def redirect_if_no_band
+            if !current_band
+              redirect_to new_band_path
+            end 
+          end 
+        
 end

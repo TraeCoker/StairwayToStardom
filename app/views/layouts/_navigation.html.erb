@@ -1,5 +1,5 @@
 <%= navigation_helper %> |
 <%= link_to('Book Show', venues_path) if current_user.band%> 
-<%= link_to 'Musicians', musicians_path %> |
-<%= link_to 'Bands', bands_path %> |
+<%= link_to 'Musicians', musicians_path if current_user.band%> 
+<%= link_to 'Bands', bands_path if current_user.band %> 
 <%= link_to 'Log Out', logout_path, method: 'delete'%>
