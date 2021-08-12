@@ -40,7 +40,7 @@ class Band < ApplicationRecord
     def self.by_genre(genre)
         self.where(genre: genre).order(reputation: :desc)
     end 
-    
+
     def play_show(review_rating, promoted)
         if review_rating > 2
             count = rand(3..4)
@@ -195,6 +195,11 @@ class Band < ApplicationRecord
     end 
 
   private 
+
+    def average_reputation
+        rep = self.musicians.all.collect{|m| m.reputation}
+        rep.sum % rep.size
+    end 
 
     def increment_musician_rep
         self.musicians.each do |m|
