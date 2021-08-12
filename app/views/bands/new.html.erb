@@ -1,4 +1,7 @@
+
 <h1>Create New Band</h1>
+<%= link_to "View available musicians", musicians_available_path %>
+<br><br>
 <%= render partial: "layouts/error", locals: {object: @band} %>
 
 <%= form_for(@band) do |f| %>
