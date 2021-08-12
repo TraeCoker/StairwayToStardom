@@ -5,12 +5,7 @@
 <%= render partial: "layouts/error", locals: {object: @band} %>
 
 <%= form_for(@band) do |f| %>
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-    <p><%= f.label :genre %>
-    <%= f.text_field :genre %></p>
-    <p><%= f.label :location %>
-    <%= f.text_field :location %></p>
+    <%= render partial: 'form', locals: {f: f} %>
     <br>
 
     <p><%= f.label "Choose vocalist or create new" %></p>
