@@ -75,40 +75,7 @@ class Band < ApplicationRecord
             end 
         end 
 
-        if self.total_shows == 1
-            self.update(reputation: 1)
-            increment_musician_rep
-        elsif self.total_shows == 50
-            self.update(reputation: 2)
-            increment_musician_rep
-        elsif self.total_shows == 100
-            self.update(reputation: 3)
-            increment_musician_rep
-        elsif self.total_shows == 150
-            self.update(reputation: 4, tier: 2)
-            increment_musician_rep
-        elsif self.total_shows == 220
-            self.update(reputation: 4)
-            increment_musician_rep
-        elsif self.total_shows == 330
-            self.update(reputation: 5)
-            increment_musician_rep
-        elsif self.total_shows == 440
-            self.update(reputation: 6)
-            increment_musician_rep
-        elsif self.total_shows == 575
-            self.update(reputation: 7, tier: 3)
-            increment_musician_rep
-        elsif self.total_shows == 700
-            self.update(reputation: 8)
-            increment_musician_rep
-        elsif self.total_shows == 850
-            self.update(reputation: 9)
-            increment_musician_rep
-        elsif self.total_shows == 1000 && self.musicians.collect{|m| m.reputation == 10}.uniq.count == 1 && self.musicians.collect{|m| m.reputation == 10}.uniq[0] == true 
-            self.update(reputation: 10, tier: 4)
-            increment_musician_rep
-        end 
+        update_reputation
     
 
         tired_musicians = []
@@ -164,6 +131,42 @@ class Band < ApplicationRecord
         @musician_name if @musician_name
     end 
 
+    def update_reputation
+        avg = average_musician_reputation
+
+        if self.total_shows == 1
+            self.update(reputation: 1)
+            increment_musician_rep
+        elsif self.total_shows == 50 && avg >= 1
+            self.update(reputation: 2)
+            increment_musician_rep
+        elsif self.total_shows == 100 && avg >= 2
+            self.update(reputation: 3)
+            increment_musician_rep
+        elsif self.total_shows == 150 && avg >= 3
+            self.update(reputation: 4, tier: 2)
+            increment_musician_rep
+        elsif self.total_shows == 275 && avg >= 4
+            self.update(reputation: 5)
+            increment_musician_rep
+        elsif self.total_shows == 440 && avg >= 5
+            self.update(reputation: 6)
+            increment_musician_rep
+        elsif self.total_shows == 575 && avg >= 6
+            self.update(reputation: 7, tier: 3)
+            increment_musician_rep
+        elsif self.total_shows == 700 && avg >= 7
+            self.update(reputation: 8)
+            increment_musician_rep
+        elsif self.total_shows == 850 && avg >= 8
+            self.update(reputation: 9)
+            increment_musician_rep
+        elsif self.total_shows == 1000 && self.musicians.collect{|m| m.reputation == 10}.uniq.count == 1 && self.musicians.collect{|m| m.reputation == 10}.uniq[0] == true 
+            self.update(reputation: 10, tier: 4)
+            increment_musician_rep
+        end 
+    end 
+
     def assess_fatigue
         if self.shows.last 
             if TimeDifference.between(self.shows.last.created_at, Time.now.utc).in_minutes > 8
@@ -193,6 +196,8 @@ class Band < ApplicationRecord
             instrument 
         end 
     end 
+
+
 
   private 
 
