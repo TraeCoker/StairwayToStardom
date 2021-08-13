@@ -4,6 +4,7 @@ class VenuesController < ApplicationController
 
     def show 
         @venue = Venue.find_by_id(params[:id])
+        @shows = @venue.shows.last(5)
     end 
 
     def index 
