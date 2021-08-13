@@ -1,6 +1,6 @@
 class Review < ApplicationRecord
     belongs_to :show 
-    after_initialize :check_for_drama
+    before_save :check_for_drama
 
         #def report_departure(musician_name)
          #   self.update(headline: "#{musician_name} leaves #{self.show.band.name}. What will they do now?")

@@ -27,8 +27,7 @@ class BandsController < ApplicationController
         @band = Band.find_by_id(params[:id])
 
         if !full_band?
-            @instrument = @band.missing_instrument?[0]
-            flash[:message] = "Your #{@instrument} player has quit the band. You must recruit or create a new member to continue."
+            format_error_message
         end 
     end 
 
@@ -76,6 +75,21 @@ class BandsController < ApplicationController
     end 
 
   private 
+
+    def format_error_message
+            instrument = @band.missing_instrument?[0]
+            if instrument == "vocals"
+                @instrument = "vocalist" 
+            elsif instrument == "guitar"
+                @instrument = "guitar player"
+            elsif instrument == "drums"
+                @instrument = "drummer" 
+            elsif instrument == "bass"
+                @instrument = "bass player" 
+            end 
+
+            flash[:message] = "Your #{@instrument} has quit the band. You must recruit or create a new member to continue."
+    end 
 
     def band_params
         params.require(:band).permit(:name, :genre, :location, :vocalist_id, :drummer_id, :guitarist_id, :bassist_id, musicians_attributes: [:name, :instrument])

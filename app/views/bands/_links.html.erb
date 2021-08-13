@@ -1,6 +1,6 @@
 <% if @instrument %>
-    <%= link_to "Choose existing #{@instrument} player", musicians_available_path%> | 
-    <%= link_to "Create new #{@instrument} player", new_musician_path %>
+    <%= link_to "Choose existing #{@instrument}", musicians_available_path%> | 
+    <%= link_to "Create new #{@instrument}", new_musician_path %>
 <%else%>
     <%= link_to 'Practice', band_practice_path(@band), method: 'post' %>
     <%= link_to 'Book a show', venues_path %>

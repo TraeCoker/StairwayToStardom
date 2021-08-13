@@ -6,6 +6,6 @@
 <h2>Recent Shows: </h2>
 <ul>
     <%@shows.each do |s|%>
-        <li><%=s.band.name%> - "<%=s.review.headline%>" - rating: <%=s.review.rating%></li>
+        <li>"<%=s.review.headline%>" - rating: <%=s.review.rating%></li>
     <%end%>
 </ul>
