@@ -21,14 +21,6 @@ class Band < ApplicationRecord
         end 
     end   
 
-    def set_defaults
-        self.reputation ||= 0
-        self.practice_count ||= 0
-        self.total_shows ||= 0
-        self.mood ||= 4
-        self.tier ||= 1
-    end 
-
     def reset_ids
         self.update(vocalist_id: nil, guitarist_id: nil, bassist_id: nil, drummer_id: nil)
     end 
@@ -201,6 +193,14 @@ class Band < ApplicationRecord
 
 
   private 
+
+    def set_defaults
+        self.reputation ||= 0
+        self.practice_count ||= 0
+        self.total_shows ||= 0
+        self.mood ||= 4
+        self.tier ||= 1
+    end 
 
     def average_musician_reputation
         rep = self.musicians.all.collect{|m| m.reputation}
