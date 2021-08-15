@@ -11,11 +11,6 @@ class Musician < ApplicationRecord
         self[:name] = value.titleize
     end 
 
-    def set_defaults 
-        self.reputation ||= 0
-        self.fatigue_level ||= 0
-    end 
-
     def leave_band
         self.past_bands << self.band.name
         self.past_genres << self.band.genre 
@@ -78,6 +73,11 @@ class Musician < ApplicationRecord
        #     musician.update(band_id: band_id)
        # end 
     #end 
+    private 
 
+    def set_defaults 
+        self.reputation ||= 0
+        self.fatigue_level ||= 0
+    end 
 
 end
