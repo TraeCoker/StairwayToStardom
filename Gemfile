@@ -26,6 +26,7 @@ gem 'omniauth-google-oauth2'
 gem 'omniauth-rails_csrf_protection'
 gem 'dotenv-rails'
 gem 'time_difference'
+gem 'bootstrap', '~> 5.0.2'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
