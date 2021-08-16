@@ -1,5 +1,27 @@
-<%= link_to 'My Band', band_path(current_user.band) %> |
-<%= link_to 'Book Show', venues_path %> |
-<%= link_to 'Musicians', musicians_path %> |
-<%= link_to 'Bands', bands_path %> |
-<%= link_to 'Log Out', logout_path, method: 'delete'%>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="<%=band_path(current_user.band)%>">My Band</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<%= venues_path %>">Book Show</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<%= musicians_path %>">Musicians</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<%= bands_path %>">Bands</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-method="delete" href="<%= logout_path %>">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
