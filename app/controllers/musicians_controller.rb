@@ -19,7 +19,7 @@ class MusiciansController < ApplicationController
       if current_user.band 
         @musicians = Musician.available(current_user.band.reputation, current_user.band.missing_instrument?[0])
       else  
-        @musicians = Musician.available(0)
+        @musicians = Musician.available(1)
       end 
 
       render :index
