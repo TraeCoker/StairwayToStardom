@@ -21,6 +21,7 @@ In your browser, navigate to localhost:3000 to access the homepage.
 
 ## Usage
 Upon visiting the homepage users are invited to make a new account or log in to an existing account
+<img width="215" alt="1" src="https://user-images.githubusercontent.com/79291960/129997252-59865d39-655c-499b-9060-db6422bd490e.PNG">
 
 
 Upon logging in, users are invited to start a new band. Users may choose between available musicians (musicians not currently in a band) or create new musicians upon band formation. Every band must have a vocalist, guitarist, bassist, and drummer.
