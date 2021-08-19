@@ -5,13 +5,8 @@ class Show < ApplicationRecord
     before_save :calculate_outcome
 
   private 
-    #practice number
-    #reputation
-    #mood
-    #musician fatigue
-
+  
     def calculate_outcome
-        #band = self.band 
         if band.tier == 1
             @score = 0
         

@@ -2,10 +2,6 @@ class Review < ApplicationRecord
     belongs_to :show 
     before_save :check_for_drama
 
-        #def report_departure(musician_name)
-         #   self.update(headline: "#{musician_name} leaves #{self.show.band.name}. What will they do now?")
-        #end 
-
     private 
         def check_for_drama
             if self.show.final_show_for != nil 
