@@ -2,6 +2,7 @@ class BandsController < ApplicationController
     before_action :redirect_if_not_logged_in
     before_action :redirect_if_not_full_band, only: [:practice]
     before_action :redirect_if_no_band, only: [:show, :index]
+    before_action :find_band, only: [:show, :edit, :update, :destroy]
 
     def new 
         @band = Band.new 
@@ -24,8 +25,6 @@ class BandsController < ApplicationController
     end 
 
     def show
-        @band = Band.find_by_id(params[:id])
-
         if !full_band?
             format_error_message
         end 
@@ -42,12 +41,9 @@ class BandsController < ApplicationController
     end 
 
     def edit
-        @band = Band.find_by_id(params[:id])
     end 
 
     def update 
-        @band = Band.find_by_id(params[:id])
-
         @band.update(band_params)
 
         if @band.valid? 
@@ -58,7 +54,6 @@ class BandsController < ApplicationController
     end 
 
     def destroy 
-        @band = Band.find_by_id(params[:id])
         @band.destroy 
 
         redirect_to user_path(current_user)
@@ -75,6 +70,14 @@ class BandsController < ApplicationController
     end 
 
   private 
+
+    def band_params
+        params.require(:band).permit(:name, :genre, :location, :vocalist_id, :drummer_id, :guitarist_id, :bassist_id, musicians_attributes: [:name, :instrument])
+    end 
+
+    def find_band
+        @band = Band.find_by_id(params[:id])
+    end 
 
     def format_error_message
             instrument = @band.missing_instrument?[0]
